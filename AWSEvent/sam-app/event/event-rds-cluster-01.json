@@ -1,0 +1,22 @@
+{
+    "version":"0",
+    "id":"b6c4d5e3-6267-f8ed-7f02-e1acc4f5bc87",
+    "detail-type":"RDS DB Cluster Event",
+    "source":"aws.rds",
+    "account":"xxxxxxxxxxxx",
+    "time":"2020-08-12T09:45:32Z",
+    "region":"ap-northeast-2",
+    "resources":[
+       "arn:aws:rds:ap-northeast-2:xxxxxxxxxxxx:cluster:test-200812"
+    ],
+    "detail":{
+       "EventCategories":[
+          "notification"
+       ],
+       "SourceType":"CLUSTER",
+       "SourceArn":"arn:aws:rds:ap-northeast-2:xxxxxxxxxxxx:cluster:test-200812",
+       "Date":"2020-08-12T09:45:32.848Z",
+       "Message":"DB cluster started",
+       "SourceIdentifier":"test-200812"
+    }
+ }

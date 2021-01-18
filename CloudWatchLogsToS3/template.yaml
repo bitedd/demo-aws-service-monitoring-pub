@@ -1,0 +1,76 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  CloudWatchLogsToS3
+
+  Migrate CloudWatch logs to S3
+
+# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+Globals:
+  Function:
+    Timeout: 3
+
+Resources:
+  APILog:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      Description: Periodically send logs from CloudWatch logs to S3.
+      CodeUri: src
+      Handler: app-apilogs.lambda_handler
+      Runtime: python3.8
+      Events:
+        CloudWatchEvent:
+          Type: Schedule
+          Properties:
+            Schedule: cron(0 12 * * ? *)
+      Environment:
+        Variables:
+          TZ: Asia/Seoul
+      Policies:
+        - arn:aws:iam::xxxxxxxxxxxx:policy/AWSLambdaBasicExecutionRole-Custom
+        #- arn:aws:iam::xxxxxxxxxxxx:policy/ECS-Fargate-Scheduling-Task-Policy
+  StudentAttendanceJobstg:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      Description: Periodically send logs from CloudWatch logs to S3.
+      CodeUri: src
+      Handler: app-servicename-studentAttendanceJob-stg.lambda_handler
+      Runtime: python3.8
+      Events:
+        CloudWatchEvent:
+          Type: Schedule
+          Properties:
+            Schedule: cron(30 12 * * ? *)
+      Environment:
+        Variables:
+          TZ: Asia/Seoul
+      Policies:
+        - arn:aws:iam::xxxxxxxxxxxx:policy/AWSLambdaBasicExecutionRole-Custom
+        #- arn:aws:iam::xxxxxxxxxxxx:policy/ECS-Fargate-Scheduling-Task-Policy
+  cbtestapi:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      Description: Periodically send logs from CloudWatch logs to S3.
+      CodeUri: src
+      Handler: app-cb-test-api.lambda_handler
+      Runtime: python3.8
+      Events:
+        CloudWatchEvent:
+          Type: Schedule
+          Properties:
+            Schedule: cron(0 13 * * ? *)
+      Environment:
+        Variables:
+          TZ: Asia/Seoul
+      Policies:
+        - arn:aws:iam::xxxxxxxxxxxx:policy/AWSLambdaBasicExecutionRole-Custom
+        #- arn:aws:iam::xxxxxxxxxxxx:policy/ECS-Fargate-Scheduling-Task-Policy
+
+Outputs:
+  APILog:
+    Description: "lambda function APILog ARN"
+    Value: !GetAtt APILog.Arn
+
+
+
+

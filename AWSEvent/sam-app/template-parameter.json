@@ -1,0 +1,42 @@
+[
+  {
+    "ParameterKey": "HookUrlForAlert",
+    "ParameterValue": "hooks.slack.com/services/HOOKURLXXXXX"
+  },
+  {
+    "ParameterKey": "SlackWorkspaceId",
+    "ParameterValue": "T2QKGBNBG"
+  },
+  {
+    "ParameterKey": "SlackChannelIdForAlert",
+    "ParameterValue": "G0188NWMZ8D"
+  },
+  {
+    "ParameterKey": "ScheduledEventsRule",
+    "ParameterValue": "DISABLED"
+  },
+  {
+    "ParameterKey": "EBSEventsRule",
+    "ParameterValue": "ENABLED"
+  },
+  {
+    "ParameterKey": "AutoScalingEventsRule",
+    "ParameterValue": "ENABLED"
+  },
+  {
+    "ParameterKey": "KMSEventsRule",
+    "ParameterValue": "ENABLED"
+  },
+  {
+    "ParameterKey": "ManagementConsoleEventsRule",
+    "ParameterValue": "ENABLED"
+  },
+  {
+    "ParameterKey": "TagEventsRule",
+    "ParameterValue": "DISABLED"
+  },
+  {
+    "ParameterKey": "TrustedAdvisorEventsRule",
+    "ParameterValue": "ENABLED"
+  }
+]

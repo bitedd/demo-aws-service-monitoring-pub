@@ -1,0 +1,41 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  RoateDailyExportedLog
+
+  Rotate Exported Daily Log
+
+# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+Globals:
+  Function:
+    Timeout: 120
+
+Resources:
+  RotateLogTask1:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      Description: Periodically send logs from CloudWatch logs to S3.
+      CodeUri: src
+      Handler: app-rotatetask-1.lambda_handler
+      Runtime: python3.8
+      Events:
+        CloudWatchEvent:
+          Type: Schedule
+          Properties:
+            Schedule: cron(0 7 * * ? *)
+      Environment:
+        Variables:
+          TZ: Asia/Seoul
+      Policies:
+        - arn:aws:iam::xxxxxxxxxxxx:policy/AWSLambdaBasicExecutionRole-Custom
+        #- arn:aws:iam::xxxxxxxxxxxx:policy/ECS-Fargate-Scheduling-Task-Policy
+
+
+Outputs:
+  RotateLogTask1:
+    Description: "lambda function RotateLogTask1 ARN"
+    Value: !GetAtt RotateLogTask1.Arn
+
+
+
+

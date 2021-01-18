@@ -1,0 +1,24 @@
+{
+    "Records":[
+       {
+          "EventSource":"aws:sns",
+          "EventVersion":"1.0",
+          "EventSubscriptionArn":"arn:aws:sns:ap-northeast-2:xxxxxxxxxxxx:Alert-createdby-AwsEvent:f47fb30c-ed13-4621-aac0-a019f8fe862d",
+          "Sns":{
+             "Type":"Notification",
+             "MessageId":"a7500e18-1762-51cf-bbc7-59b7125c72eb",
+             "TopicArn":"arn:aws:sns:ap-northeast-2:xxxxxxxxxxxx:Alert-createdby-AwsEvent",
+             "Subject":"AWS CloudFormation Notification",
+             "Message":"StackId='arn:aws:cloudformation:ap-northeast-2:xxxxxxxxxxxx:stack/AwsEvent-ChatbotForAlert-14ORVA223L0U8/1f668d20-dae2-11ea-b755-06df870004ce'\nTimestamp='2020-08-13T09:08:14.673Z'\nEventId='84fd7860-dd44-11ea-bbd0-06c2ced9dd8e'\nLogicalResourceId='AwsEvent-ChatbotForAlert-14ORVA223L0U8'\nNamespace='xxxxxxxxxxxx'\nPhysicalResourceId='arn:aws:cloudformation:ap-northeast-2:xxxxxxxxxxxx:stack/AwsEvent-ChatbotForAlert-14ORVA223L0U8/1f668d20-dae2-11ea-b755-06df870004ce'\nPrincipalId='AIDARRGEUWRSX6JF3ANQV'\nResourceProperties='null'\nResourceStatus='UPDATE_IN_PROGRESS'\nResourceStatusReason='User Initiated'\nResourceType='AWS::CloudFormation::Stack'\nStackName='AwsEvent-ChatbotForAlert-14ORVA223L0U8'\nClientRequestToken='null'\n",
+             "Timestamp":"2020-08-13T09:08:14.726Z",
+             "SignatureVersion":"1",
+             "Signature":"mc7GFxW9NIH3k+q+2rGLbyHMXb3MXAlYNyOPBcTOekqimStKrUYsTx8/Gu1ZvL/99BgICnJ7CJgPfVxCgDhg3Q1dYO6l9CiQScZqRvQb+YE6U9jV4me40h4uaY2tvqStVg8MLX+CCeFfn+afV3VdXgnJWDsTEfIlB3wPqM5ln/q7kNkgnfz9Fr2VEtHhR9K6Y4hi5FJNQZQdNFw8aklokVjbh2XjiHf5obl5aKctsk8A9Ogu4Chdw/dBIOr/PGkFMTaPdBOyp2JHF5zR3cUuVgiYVTrgeXYAFZ702lvTttGofwoXrBIQ8v15nV+DeWrq5pNzlZjy/gWwN18aFoWluQ==",
+             "SigningCertUrl":"https://sns.ap-northeast-2.amazonaws.com/SimpleNotificationService-a86cb10b4e1f29c941702d737128f7b6.pem",
+             "UnsubscribeUrl":"https://sns.ap-northeast-2.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:ap-northeast-2:xxxxxxxxxxxx:Alert-createdby-AwsEvent:f47fb30c-ed13-4621-aac0-a019f8fe862d",
+             "MessageAttributes":{
+ 
+             }
+          }
+       }
+    ]
+ }

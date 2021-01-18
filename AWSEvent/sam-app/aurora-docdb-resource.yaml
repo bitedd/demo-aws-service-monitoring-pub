@@ -1,0 +1,287 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: AWSCloudFormationTemplates/security/Detective sets Amazon Detective.
+
+Parameters:
+
+  SNSForAlertArn:
+    Type: String
+    Default: 'arn:aws:sns:ap-northeast-2:xxxxxxxxxxxx:Alert-createdby-AwsEvent'
+    Description: Amazon SNS Topic ARN for alert
+    
+Resources:
+
+  AuroraCPUUtilizationAlarm1:
+    Type: "AWS::CloudWatch::Alarm"
+    Properties:
+      ActionsEnabled: true
+      AlarmActions:
+      - Ref: SNSForAlertArn
+      AlarmDescription: 'CPU_Utilization'
+      Dimensions:
+      - Name: DBInstanceIdentifier
+        Value: servicenamesesprod-instance-1
+      MetricName: CPUUtilization
+      Statistic: Maximum
+      Namespace: 'AWS/RDS'
+      Threshold: '85'
+      Unit: Percent
+      ComparisonOperator: 'GreaterThanOrEqualToThreshold'
+      Period: '60'
+      EvaluationPeriods: '5'
+      TreatMissingData: 'notBreaching'
+      
+  AuroraCPUUtilizationAlarm2:
+    Type: "AWS::CloudWatch::Alarm"
+    Properties:
+      ActionsEnabled: true
+      AlarmActions:
+      - Ref: SNSForAlertArn
+      AlarmDescription: 'CPU_Utilization'
+      Dimensions:
+      - Name: DBInstanceIdentifier
+        Value: servicenamesesprod-instance-1-ap-northeast-2c
+      MetricName: CPUUtilization
+      Statistic: Maximum
+      Namespace: 'AWS/RDS'
+      Threshold: '85'
+      Unit: Percent
+      ComparisonOperator: 'GreaterThanOrEqualToThreshold'
+      Period: '60'
+      EvaluationPeriods: '5'
+      TreatMissingData: 'notBreaching'
+  AuroraMemoryUtilizationAlarm1:
+    Type: "AWS::CloudWatch::Alarm"
+    Properties:
+      ActionsEnabled: true
+      AlarmActions:
+      - Ref: SNSForAlertArn
+      AlarmDescription: 'Memory_FreeableMemorySize'
+      Dimensions:
+      - Name: DBInstanceIdentifier
+        Value: servicenamesesprod-instance-1
+      MetricName: FreeableMemory
+      Statistic: Maximum
+      Namespace: 'AWS/RDS'
+      Threshold: '1073741824'
+      ComparisonOperator: 'LessThanOrEqualToThreshold'
+      Period: '60'
+      EvaluationPeriods: '5'
+      TreatMissingData: 'notBreaching'
+      
+  AuroraMemoryUtilizationAlarm2:
+    Type: "AWS::CloudWatch::Alarm"
+    Properties:
+      ActionsEnabled: true
+      AlarmActions:
+      - Ref: SNSForAlertArn
+      AlarmDescription: 'Memory_FreeableMemorySize'
+      Dimensions:
+      - Name: DBInstanceIdentifier
+        Value: servicenamesesprod-instance-1-ap-northeast-2c
+      MetricName: FreeableMemory
+      Statistic: Maximum
+      Namespace: 'AWS/RDS'
+      Threshold: '1073741824'
+      ComparisonOperator: 'LessThanOrEqualToThreshold'
+      Period: '60'
+      EvaluationPeriods: '5'
+      TreatMissingData: 'notBreaching'
+
+
+  AuroraMaxUsedTxIDsAlarm1:
+    Type: "AWS::CloudWatch::Alarm"
+    Properties:
+      ActionsEnabled: true
+      AlarmActions:
+      - Ref: SNSForAlertArn
+      AlarmDescription: 'Maximum Used Transaction IDs'
+      Dimensions:
+      - Name: DBInstanceIdentifier
+        Value: servicenamesesprod-instance-1
+      MetricName: 'MaximumUsedTransactionIDs'
+      Statistic: Average
+      Namespace: 'AWS/RDS'
+      Threshold: '600000000'
+      Unit: Count
+      ComparisonOperator: 'GreaterThanOrEqualToThreshold'
+      Period: '60'
+      EvaluationPeriods: '5'
+      TreatMissingData: 'notBreaching'
+      
+  AuroraMaxUsedTxIDsAlarm2:
+    Type: "AWS::CloudWatch::Alarm"
+    Properties:
+      ActionsEnabled: true
+      AlarmActions:
+      - Ref: SNSForAlertArn
+      AlarmDescription: 'Maximum Used Transaction IDs'
+      Dimensions:
+      - Name: DBInstanceIdentifier
+        Value: servicenamesesprod-instance-1-ap-northeast-2c
+      MetricName: 'MaximumUsedTransactionIDs'
+      Statistic: Average
+      Namespace: 'AWS/RDS'
+      Threshold: '600000000'
+      Unit: Count
+      ComparisonOperator: 'GreaterThanOrEqualToThreshold'
+      Period: '60'
+      EvaluationPeriods: '5'
+      TreatMissingData: 'notBreaching'
+
+  AuroraFreeLocalStorageAlarm1:
+    Type: "AWS::CloudWatch::Alarm"
+    Properties:
+      ActionsEnabled: true
+      AlarmActions:
+      - Ref: SNSForAlertArn
+      AlarmDescription: 'Free Local Storage'
+      Dimensions:
+      - Name: DBInstanceIdentifier
+        Value: servicenamesesprod-instance-1
+      MetricName: 'FreeLocalStorage'
+      Statistic: Average
+      Namespace: 'AWS/RDS'
+      Threshold: '5368709120'
+      Unit: Bytes
+      ComparisonOperator: 'LessThanOrEqualToThreshold'
+      Period: '60'
+      EvaluationPeriods: '5'
+      TreatMissingData: 'notBreaching'
+      
+  AuroraFreeLocalStorageAlarm2:
+    Type: "AWS::CloudWatch::Alarm"
+    Properties:
+      ActionsEnabled: true
+      AlarmActions:
+      - Ref: SNSForAlertArn
+      AlarmDescription: 'Free Local Storage'
+      Dimensions:
+      - Name: DBInstanceIdentifier
+        Value: servicenamesesprod-instance-1-ap-northeast-2c
+      MetricName: 'FreeLocalStorage'
+      Statistic: Average
+      Namespace: 'AWS/RDS'
+      Threshold: '5368709120'
+      Unit: Bytes
+      ComparisonOperator: 'LessThanOrEqualToThreshold'
+      Period: '60'
+      EvaluationPeriods: '5'
+      TreatMissingData: 'notBreaching'   
+
+  AuroraDatabaseClusterEventSubscription:
+    Type: 'AWS::RDS::EventSubscription'
+    Properties:
+      EventCategories:
+      - failover
+      - failure
+      - notification
+      SnsTopicArn: !Ref SNSForAlertArn
+      SourceIds: 
+      - servicenamesesprod
+      SourceType: 'db-cluster'
+
+  AuroraDatabaseInstanceEventSubscription:
+    Type: 'AWS::RDS::EventSubscription'
+    Properties:
+      EventCategories:
+      - availability
+      - configuration change
+      - deletion
+      - failover
+      - failure
+      - maintenance
+      - notification
+      - recovery
+      - backup
+      SnsTopicArn: !Ref SNSForAlertArn
+      SourceIds: 
+      - servicenamesesprod-instance-1
+      - servicenamesesprod-instance-1-ap-northeast-2c
+      SourceType: 'db-instance'
+      
+  AuroraDBParameterGroupEventSubscription:
+    Type: 'AWS::RDS::EventSubscription'
+    Properties:
+      EventCategories:
+      - configuration change
+      SnsTopicArn: !Ref SNSForAlertArn
+      SourceIds: 
+      - servicename-ses-aurora-prod
+      SourceType: 'db-parameter-group'
+
+  DocDBCPUUtilizationAlarm1:
+    Type: "AWS::CloudWatch::Alarm"
+    Properties:
+      ActionsEnabled: true
+      AlarmActions:
+      - Ref: SNSForAlertArn
+      AlarmDescription: 'CPU_Utilization'
+      Dimensions:
+      - Name: DBInstanceIdentifier
+        Value: servicename-ses-docudb-prod
+      MetricName: CPUUtilization
+      Statistic: Maximum
+      Namespace: 'AWS/DocDB'
+      Threshold: '85'
+      Unit: Percent
+      ComparisonOperator: 'GreaterThanOrEqualToThreshold'
+      Period: '60'
+      EvaluationPeriods: '5'
+      TreatMissingData: 'notBreaching'
+
+  DocDBMemoryUtilizationAlarm1:
+    Type: "AWS::CloudWatch::Alarm"
+    Properties:
+      ActionsEnabled: true
+      AlarmActions:
+      - Ref: SNSForAlertArn
+      AlarmDescription: 'Memory_FreeableMemorySize'
+      Dimensions:
+      - Name: DBInstanceIdentifier
+        Value: servicenamesesprod-instance-1
+      MetricName: FreeableMemory
+      Statistic: Maximum
+      Namespace: 'AWS/DocDB'
+      Threshold: '536870912'
+      ComparisonOperator: 'LessThanOrEqualToThreshold'
+      Period: '60'
+      EvaluationPeriods: '5'
+      TreatMissingData: 'notBreaching'
+  DocDBDatabaseClusterEventSubscription:
+    Type: 'AWS::RDS::EventSubscription'
+    Properties:
+      EventCategories:
+      - failover
+      - failure
+      - notification
+      SnsTopicArn: !Ref SNSForAlertArn
+      SourceIds: 
+      - servicename-ses-docudb-prod
+      SourceType: 'db-cluster'
+
+  DocDBDatabaseInstanceEventSubscription:
+    Type: 'AWS::RDS::EventSubscription'
+    Properties:
+      EventCategories:
+      - availability
+      - configuration change
+      - deletion
+      - failover
+      - failure
+      - maintenance
+      - notification
+      - recovery
+      - backup
+      SnsTopicArn: !Ref SNSForAlertArn
+      SourceIds: 
+      - servicename-ses-docudb-prod
+      SourceType: 'db-instance'
+      
+
+
+
+
+
+  
+
+      

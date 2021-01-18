@@ -1,0 +1,22 @@
+{
+    "version":"0",
+    "id":"ed3c6415-04bd-1e90-998b-e1922373cb1c",
+    "detail-type":"RDS DB Instance Event",
+    "source":"aws.rds",
+    "account":"xxxxxxxxxxxx",
+    "time":"2020-08-12T09:42:59Z",
+    "region":"ap-northeast-2",
+    "resources":[
+       "arn:aws:rds:ap-northeast-2:xxxxxxxxxxxx:db:test-200812-instance-1"
+    ],
+    "detail":{
+       "EventCategories":[
+          "availability"
+        ],
+        "SourceType":"DB_INSTANCE",
+        "SourceArn":"arn:aws:rds:ap-northeast-2:xxxxxxxxxxxx:db:test-200812-instance-1",
+        "Date":"2020-08-12T09:42:59.265Z",
+        "Message":"Error restarting mysql: Could not verify and start mysqld.",
+        "SourceIdentifier":"test-200812-instance-1"
+    }
+}
